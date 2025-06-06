@@ -1,7 +1,7 @@
-import React, { InputHTMLAttributes } from 'react';
+import React from 'react';
 import { cn } from '../../lib/utils';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   icon?: React.ReactNode;
   fullWidth?: boolean;
@@ -11,9 +11,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, icon, fullWidth = false, error, type = "text", ...props }, ref) => {
     return (
-      <div className={cn("relative", fullWidth ? "w-full" : "w-auto")}>
+      <div className={cn('flex flex-col', fullWidth && 'w-full')}>
         {label && (
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="mb-1 text-sm font-medium text-gray-700">
             {label}
           </label>
         )}
@@ -26,10 +26,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             type={type}
             className={cn(
-              "block rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm",
-              icon ? "pl-10" : "pl-4",
-              error ? "border-red-300" : "border-gray-300",
-              fullWidth ? "w-full" : "w-auto",
+              'px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm',
+              'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent',
+              'disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200',
+              icon && 'pl-10',
+              error && 'border-red-500 focus:ring-red-500',
+              fullWidth && 'w-full',
               className
             )}
             ref={ref}
@@ -44,6 +46,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-Input.displayName = "Input";
+Input.displayName = 'Input';
 
 export default Input;
