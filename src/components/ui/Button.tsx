@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { LucideIcon } from 'lucide-react';
+import { DivideIcon as LucideIcon } from 'lucide-react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'danger';
@@ -89,3 +89,5 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
 Button.displayName = 'Button';
 
 export default Button;
+
+export { Button }
