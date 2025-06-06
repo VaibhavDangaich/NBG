@@ -8,7 +8,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, icon, fullWidth = false, error, type = "text", ...props }, ref) => {
     return (
       <div className={cn('flex flex-col', fullWidth && 'w-full')}>

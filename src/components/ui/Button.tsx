@@ -10,7 +10,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   iconPosition?: 'left' | 'right';
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   className = '',
   variant = 'primary',
   size = 'md',
@@ -89,5 +89,3 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
 Button.displayName = 'Button';
 
 export default Button;
-
-export { Button }
