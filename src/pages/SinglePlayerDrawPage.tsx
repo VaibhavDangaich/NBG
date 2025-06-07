@@ -50,83 +50,85 @@ export const SinglePlayerDrawPage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-xl font-bold">Drawing Practice Mode</h2>
-              <p className="text-sm text-gray-500">
-                Practice your medical drawing skills
-              </p>
-            </div>
-            <Button
-              variant="outline"
-              onClick={() => navigate('/')}
-              icon={<Brain size={18} />}
-            >
-              Exit Practice
-            </Button>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <div className="lg:col-span-1 bg-white rounded-lg shadow-md p-4">
-            <h3 className="font-bold mb-4">Current Word</h3>
-            <div className="space-y-2">
-              <div className="p-4 bg-blue-50 rounded-lg">
-                <div className="font-medium text-gray-600">Category:</div>
-                <div className="text-lg font-bold text-blue-600">
-                  {currentWord.category}
-                </div>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-6">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-bold">Drawing Practice Mode</h2>
+                <p className="text-sm text-gray-500">
+                  Practice your medical drawing skills
+                </p>
               </div>
-              
-              <div className="p-4 bg-blue-50 rounded-lg">
-                <div className="font-medium text-gray-600">Difficulty:</div>
-                <div className={`text-lg font-bold ${
-                  currentWord.difficulty === 'easy' ? 'text-green-600' :
-                  currentWord.difficulty === 'medium' ? 'text-yellow-600' :
-                  'text-red-600'
-                }`}>
-                  {currentWord.difficulty.charAt(0).toUpperCase() + currentWord.difficulty.slice(1)}
-                </div>
-              </div>
-
-              <div className="p-4 bg-blue-50 rounded-lg">
-                <div className="font-medium text-gray-600">Word to Draw:</div>
-                <button
-                  className="w-full mt-1 py-2 px-4 rounded-md bg-white shadow-sm border border-blue-200 hover:bg-blue-50"
-                  onClick={() => setShowWord(!showWord)}
-                >
-                  {showWord ? currentWord.word : '(Click to reveal)'}
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-6 space-y-2">
               <Button
                 variant="outline"
-                fullWidth
-                onClick={handleResetCanvas}
-                icon={<Eraser size={18} />}
+                onClick={() => navigate('/')}
+                icon={<Brain size={18} />}
               >
-                Clear Canvas
-              </Button>
-              <Button
-                fullWidth
-                onClick={handleNextWord}
-                icon={<RotateCcw size={18} />}
-              >
-                Next Word
+                Exit Practice
               </Button>
             </div>
           </div>
 
-          <div className="lg:col-span-3">
-            <DrawingCanvas
-              key={canvasKey}
-              isDrawer={true}
-              className="h-[600px]"
-            />
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div className="lg:col-span-1 bg-white rounded-lg shadow-md p-4">
+              <h3 className="font-bold mb-4">Current Word</h3>
+              <div className="space-y-2">
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <div className="font-medium text-gray-600">Category:</div>
+                  <div className="text-lg font-bold text-blue-600">
+                    {currentWord.category}
+                  </div>
+                </div>
+                
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <div className="font-medium text-gray-600">Difficulty:</div>
+                  <div className={`text-lg font-bold ${
+                    currentWord.difficulty === 'easy' ? 'text-green-600' :
+                    currentWord.difficulty === 'medium' ? 'text-yellow-600' :
+                    'text-red-600'
+                  }`}>
+                    {currentWord.difficulty.charAt(0).toUpperCase() + currentWord.difficulty.slice(1)}
+                  </div>
+                </div>
+
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <div className="font-medium text-gray-600">Word to Draw:</div>
+                  <button
+                    className="w-full mt-1 py-2 px-4 rounded-md bg-white shadow-sm border border-blue-200 hover:bg-blue-50"
+                    onClick={() => setShowWord(!showWord)}
+                  >
+                    {showWord ? currentWord.word : '(Click to reveal)'}
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-6 space-y-2">
+                <Button
+                  variant="outline"
+                  fullWidth
+                  onClick={handleResetCanvas}
+                  icon={<Eraser size={18} />}
+                >
+                  Clear Canvas
+                </Button>
+                <Button
+                  fullWidth
+                  onClick={handleNextWord}
+                  icon={<RotateCcw size={18} />}
+                >
+                  Next Word
+                </Button>
+              </div>
+            </div>
+
+            <div className="lg:col-span-3">
+              <DrawingCanvas
+                key={canvasKey}
+                isDrawer={true}
+                className="h-[600px]"
+              />
+            </div>
           </div>
         </div>
       </div>

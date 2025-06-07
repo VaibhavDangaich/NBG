@@ -13,7 +13,7 @@ export const JoinPrivateRoomPage: React.FC = () => {
   
   return (
     <Layout>
-      <div className="flex justify-center items-center py-8">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex justify-center items-center py-8">
         <div className="w-full max-w-md px-4">
           <JoinRoomForm 
             gameMode={gameMode as GameMode} 

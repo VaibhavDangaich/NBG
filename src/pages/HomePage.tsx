@@ -1,11 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Layout from './Layout';
 import Button from '../components/ui/Button';
 import Card, { CardHeader, CardBody } from '../components/ui/Card';
-import { Brain, Pencil, Users, Zap, Trophy, Target } from 'lucide-react';
+import { Brain, Pencil, Users, Zap, Trophy, Target, X } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
+  const navigate = useNavigate();
+  const [showGameModeModal, setShowGameModeModal] = useState(false);
+
+  const handleStartPlaying = () => {
+    setShowGameModeModal(true);
+  };
+
+  const handleGameModeSelect = (gameMode: 'mcq' | 'draw') => {
+    setShowGameModeModal(false);
+    navigate(`/${gameMode}/play`);
+  };
+
   return (
     <Layout>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -26,7 +38,7 @@ export const HomePage: React.FC = () => {
                 Challenge friends, test your knowledge, and visualize complex medical concepts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="px-8 py-4">
+                <Button size="lg" className="px-8 py-4" onClick={handleStartPlaying}>
                   Start Playing
                 </Button>
                 <Button variant="outline" size="lg" className="px-8 py-4">
@@ -199,6 +211,49 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Game Mode Selection Modal */}
+        {showGameModeModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
+              <div className="flex items-center justify-between p-6 border-b">
+                <h3 className="text-xl font-bold">Choose Game Mode</h3>
+                <button
+                  onClick={() => setShowGameModeModal(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              <div className="p-6 space-y-4">
+                <button
+                  onClick={() => handleGameModeSelect('mcq')}
+                  className="w-full p-4 border-2 border-blue-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
+                >
+                  <div className="flex items-center">
+                    <Brain size={24} className="text-blue-600 mr-3" />
+                    <div className="text-left">
+                      <div className="font-bold">MCQ Quiz Battle</div>
+                      <div className="text-sm text-gray-600">Test your knowledge with timed questions</div>
+                    </div>
+                  </div>
+                </button>
+                <button
+                  onClick={() => handleGameModeSelect('draw')}
+                  className="w-full p-4 border-2 border-purple-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-colors"
+                >
+                  <div className="flex items-center">
+                    <Pencil size={24} className="text-purple-600 mr-3" />
+                    <div className="text-left">
+                      <div className="font-bold">Drawing Challenge</div>
+                      <div className="text-sm text-gray-600">Draw and guess medical concepts</div>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </Layout>
   );
